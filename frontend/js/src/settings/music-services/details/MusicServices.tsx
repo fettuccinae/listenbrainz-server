@@ -56,6 +56,7 @@ export default function MusicServices() {
         )
       : undefined
   );
+  const [showLastfmAlert, setShowLastfmAlert] = React.useState(true);
 
   const handlePermissionChange = async (
     serviceName: string,
@@ -412,18 +413,28 @@ export default function MusicServices() {
               Connect to your Last.FM account to import your entire listening
               history and automatically add your new scrobbles to ListenBrainz.
             </p>
-            <p className="alert alert-warning">
-              You must first disable the &#34;Hide recent listening
-              information&#34; setting in your Last.fm{" "}
-              <a
-                href="https://www.last.fm/settings/privacy"
-                target="_blank"
-                rel="noreferrer"
-              >
-                privacy settings
-              </a>
-              .
-            </p>
+            {showLastfmAlert && (
+              <div className="alert alert-warning">
+                <button
+                  type="button"
+                  className="close text-danger"
+                  onClick={() => setShowLastfmAlert(false)}
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                You must first disable the &#34;Hide recent listening
+                information&#34; setting in your Last.fm{" "}
+                <a
+                  href="https://www.last.fm/settings/privacy"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  privacy settings
+                </a>
+                .
+              </div>
+            )}
             <form onSubmit={handleConnectToLaftFM}>
               <div className="flex flex-wrap" style={{ gap: "1em" }}>
                 <div>
